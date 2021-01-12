@@ -38,10 +38,23 @@ def __need_prefix_of_0(filename):
 def __normalization_filename(target_dir, fnames):
     for i in range(len(fnames)):
         filename = glob.glob(target_dir + '/' + fnames[i])
+        print('normalization')
+        print(target_dir + '/' + fnames[i])
+        print(filename)
+        print(type(filename))
         filename = filename[0]
+        # if type(filename) == type([]):
+        #     filename = filename[0]
         if __need_prefix_of_0(fnames[i]) == True:
             os.rename(filename, target_dir + '/0' + fnames[i])
             fnames[i] = '/0' + fnames[i]
+    return fnames
+
+def __update_fnames(fnames):
+    for i in range(len(fnames)):
+        if '.png' in fnames[i]:
+            split = fnames[i].split('.')
+            fnames[i] = split[0] + '.jpeg'
     return fnames
 
 # ----------------------------------------------
@@ -54,12 +67,16 @@ def convert_from_deepest_subdir(dirname='./', dir_delete=False):
     os.makedirs('pdf')
     for current_dir, dir_names, fnames in os.walk(dirname):
         imgs = []
-        if len(dir_names) > 0 or current_dir=='./pdf' or current_dir=='./git':
+        print(current_dir)
+        print(dir_names)
+        if len(dir_names) > 0 or current_dir=='./pdf' or '.git' in current_dir:
             continue
         else:
             __convert2JPEG(current_dir)
+            fnames = __update_fnames(fnames)
             fnames = __normalization_filename(current_dir, fnames)
             pdf_name = './pdf/' + current_dir[2:] + '.pdf'
+
             with open(pdf_name, "wb") as f:
                 for fname in fnames:
                     if not fname.endswith(".jpeg"):

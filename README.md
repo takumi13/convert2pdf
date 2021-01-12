@@ -6,6 +6,7 @@ convert2pdf.pyの動作を説明する.
 
 convert2pdf/  
 　　┣ convert2pdf.py  
+　　┣ pdf/
 　　┣ hoge/  
 　　┃　┣ 1.png  
 　　┃　┣ 2.png  
