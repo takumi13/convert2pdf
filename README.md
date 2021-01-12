@@ -19,7 +19,7 @@ convert2pdf/
 
 ## メソッド  
 ## convert_from_deepest_subdir(dirname='./', dir_delete=False)  
-###引数の説明  
+### 引数の説明  
 - dirname: 探索対象のディレクトリ. デフォルトではカレントディレクトリが指定される.
 - dir_delete: Trueを指定すると, 探索したフォルダを最後に削除する. Falseを指定すると削除はしない. デフォルトではFalseが指定されている.
 
