@@ -49,12 +49,12 @@ def __normalization_filename(target_dir, fnames):
 # 最深部に到達したときに, そこにある.pngファイルをすべて結合して
 # .pdfファイルを生成する
 # ----------------------------------------------
-def convert_from_deepest_subdir(dirname='./'):
+def convert_from_deepest_subdir(dirname='./', dir_delete=False):
     shutil.rmtree('pdf')
     os.makedirs('pdf')
     for current_dir, dir_names, fnames in os.walk(dirname):
         imgs = []
-        if len(dir_names) > 0 or current_dir=='./pdf':
+        if len(dir_names) > 0 or current_dir=='./pdf' or current_dir=='./git':
             continue
         else:
             __convert2JPEG(current_dir)
@@ -74,7 +74,8 @@ def convert_from_deepest_subdir(dirname='./'):
                 print(sorted_imgs)
                 print()
                 f.write(img2pdf.convert(sorted_imgs))
-                shutil.rmtree(current_dir)
+                if dir_delete == True:
+                    shutil.rmtree(current_dir)
 
 def main():
     convert_from_deepest_subdir()
